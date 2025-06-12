@@ -1,0 +1,22 @@
+# development stage
+FROM node:20-alpine AS dev
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install  
+
+COPY . .
+
+EXPOSE 8080
+
+CMD ["npm", "run", "dev"]
+
+# production stage
+FROM node:20-alpine AS prod
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --production
+COPY . .
+EXPOSE 8080
+CMD ["npm", "start"]

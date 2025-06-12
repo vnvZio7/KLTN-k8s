@@ -1,0 +1,11 @@
+services:
+   mongo:
+    image: vnvzio7/tcinema-mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    command: ["mongod", "--quiet", "--logpath", "/dev/null"]
+
+volumes:
+  mongo-data:
