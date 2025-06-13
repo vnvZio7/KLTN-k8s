@@ -4,6 +4,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
       target: dev
+    image: vnvzio7/tcinema-backend
     ports:
       - "8080:8080"
     environment:
@@ -11,14 +12,19 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
-    command: npm run dev 
+    # command: npm run dev 
     restart: unless-stopped
+    networks:
+      - cinema-net  
+    depends_on:
+      - mysql 
 
   frontend:
     build: 
       context: ./frontend
       dockerfile: Dockerfile
       target: dev
+    image: vnvzio7/tcinema-frontend  
     ports:
       - "3000:3000"
     environment:
@@ -29,3 +35,23 @@ services:
       - /app/node_modules
     command: npm run dev
     restart: unless-stopped
+
+  # user-service:
+  #   build: 
+  #     context: ./service/user-service
+  #     dockerfile: Dockerfile
+  #     target: dev
+  #   image: vnvzio7/tcinema-user-service
+  #   ports:
+  #     - "8081:8081"
+  #   environment:
+  #     - NODE_ENV=development
+  #   volumes:
+  #     - ./service/user-service:/app
+  #     - /app/node_modules
+  #   networks:
+  #     - cinema-net   
+  #   depends_on:
+  #     - mysql
+  #   restart: unless-stopped
+
