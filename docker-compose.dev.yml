@@ -11,7 +11,7 @@ services:
       - NODE_ENV=development
     volumes:
       - ./backend:/app
-      - /app/node_modules
+      - backend:/app/node_modules
     # command: npm run dev 
     restart: unless-stopped
     networks:
@@ -32,26 +32,30 @@ services:
       - CHOKIDAR_USEPOLLING=true  # fix hot reload trong Docker (Linux)  
     volumes:
       - ./frontend:/app
-      - /app/node_modules
+      - frontend:/app/node_modules
     command: npm run dev
     restart: unless-stopped
 
-  # user-service:
-  #   build: 
-  #     context: ./service/user-service
-  #     dockerfile: Dockerfile
-  #     target: dev
-  #   image: vnvzio7/tcinema-user-service
-  #   ports:
-  #     - "8081:8081"
-  #   environment:
-  #     - NODE_ENV=development
-  #   volumes:
-  #     - ./service/user-service:/app
-  #     - /app/node_modules
-  #   networks:
-  #     - cinema-net   
-  #   depends_on:
-  #     - mysql
-  #   restart: unless-stopped
+  user-service:
+    build: 
+      context: ./service/user-service
+      dockerfile: Dockerfile
+      target: dev
+    image: vnvzio7/tcinema-user-service
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./service/user-service:/app
+      - user-service:/app/node_modules
+    networks:
+      - cinema-net   
+    depends_on:
+      - mysql
+    restart: unless-stopped
 
+volumes:
+  backend:
+  frontend:
+  user-service:

@@ -4,6 +4,7 @@ import cors from "cors";
 import path from "path";
 import connectDB from "./config/db";
 import authRoutes from "./routes/authRoutes";
+import userRoutes from "./routes/userRoutes";
 import sequelize from "./config/sequelize";
 
 const app = express();
@@ -18,7 +19,7 @@ app.use(
 );
 
 // Connect Database
-// connectDB();
+connectDB();
 
 // Middleware
 app.use(express.json());
@@ -27,7 +28,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
+app.use("/api/users", userRoutes);
 // app.use("/api/report", reportRoutes);
 async function connectWithRetry(retries = 5, delay = 5000) {
   for (let i = 0; i < retries; i++) {

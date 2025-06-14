@@ -5,6 +5,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+      - mongo-config:/data/configdb
     command: ["mongod", "--quiet", "--logpath", "/dev/null"]
     networks:
       - cinema-net  
@@ -23,6 +24,7 @@ services:
       - cinema-net   
 volumes:
   mongo-data:
+  mongo-config:
   mysql-data:
 networks:
   cinema-net:

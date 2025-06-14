@@ -2,8 +2,8 @@ import express from "express";
 import {
   registerUser,
   loginUser,
-  getUserProfile,
   updateUserProfile,
+  getUserProfile,
 } from "../controllers/authController";
 import { protect } from "../middlewares/authMiddleware";
 
