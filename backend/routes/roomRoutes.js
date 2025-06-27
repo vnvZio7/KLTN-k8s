@@ -1,14 +1,21 @@
 import express from "express";
-import { protect } from "../middlewares/authMiddleware";
+import { adminOnly, protect } from "../middlewares/authMiddleware";
+import {
+  createRoom,
+  deleteRoom,
+  getRoomById,
+  getRooms,
+  updateRoom,
+} from "../controllers/roomController";
 
 const router = express.Router();
 
-// Booking Management Routes
-// router.get("/", protect, getBookings);
-// router.get("/:id", protect, getBookingById);
+// Room Management Routes
+router.get("/", protect, getRooms);
+router.get("/:id", protect, getRoomById);
 
-// router.post("/", protect, createBooking);
-// router.put("/:id", protect, updateBooking);
-// router.delete("/:id", protect, deleteBooking);
+router.post("/", protect, adminOnly, createRoom);
+router.put("/:id", protect, adminOnly, updateRoom);
+router.delete("/:id", protect, adminOnly, deleteRoom);
 
 module.exports = router;

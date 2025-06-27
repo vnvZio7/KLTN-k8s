@@ -42,42 +42,41 @@ const createRoom = async (req, res) => {
   }
 };
 
-// // @desc    Update room by ID
-// // @route   PUT /api/rooms/:id
-// // @access  Private
-// const updateRoom = async (req, res) => {
-//   try {
-//     const room = await Room.findByPk(req.params.id);
-//     if (!room) return res.status(404).json({ message: "Room not found" });
-//     room.name = req.body.name || room.name;
-//     room.price = req.body.price || room.price;
-//     room.description = req.body.description || room.description;
-//     room.image_url = req.body.image_url || room.image_url;
-//     const updatedRoom = await room.save();
-//     res.json({ message: "Room updated successfully!", updatedRoom });
-//   } catch (error) {
-//     res.status(500).json({ message: "Server error", error: error.message });
-//   }
-// };
+// @desc    Update room by ID
+// @route   PUT /api/rooms/:id
+// @access  Private
+const updateRoom = async (req, res) => {
+  try {
+    const room = await Room.findById(req.params.id);
+    if (!room) return res.status(404).json({ message: "Room not found" });
+    room.cinema_id = req.body.cinema_id || room.cinema_id;
+    room.name = req.body.name || room.name;
+    room.seat_map = req.body.seat_map || room.seat_map;
+    const updatedRoom = await room.save();
+    res.json({ message: "Room updated successfully!", updatedRoom });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
-// // @desc    Delete room by ID
-// // @route   DELETE /api/rooms/:id
-// // @access  Private
-// const deleteRoom = async (req, res) => {
-//   try {
-//     const room = await Room.findByPk(req.params.id);
-//     if (!room) return res.status(404).json({ message: "Room not found" });
-//     await room.destroy();
-//     res.json({ message: "Room deleted successfully!" });
-//   } catch (error) {
-//     res.status(500).json({ message: "Server error", error: error.message });
-//   }
-// };
+// @desc    Delete room by ID
+// @route   DELETE /api/rooms/:id
+// @access  Private
+const deleteRoom = async (req, res) => {
+  try {
+    const room = await Room.findById(req.params.id);
+    if (!room) return res.status(404).json({ message: "Room not found" });
+    await room.deleteOne();
+    res.json({ message: "Room deleted successfully!" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
 module.exports = {
   getRooms,
   getRoomById,
-  //   updateRoom,
+  updateRoom,
   createRoom,
-  //   deleteRoom,
+  deleteRoom,
 };
