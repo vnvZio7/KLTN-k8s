@@ -2,30 +2,48 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("users", {
+    await queryInterface.createTable("movies", {
       id: {
         type: Sequelize.BIGINT,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      fullname: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        unique: true,
+      description: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
-      password_hash: {
+      adult: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      language: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      role: {
-        type: Sequelize.ENUM("USER", "ADMIN"),
+      release_date: {
+        type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: "USER",
+      },
+      backdrop_path: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      trailer_url: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      vote_average: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      vote_count: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -41,6 +59,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable("users");
+    await queryInterface.dropTable("movies");
   },
 };

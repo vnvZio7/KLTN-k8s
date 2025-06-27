@@ -1,20 +1,18 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
 
-const User = sequelize.define(
-  "User",
+const Genre = sequelize.define(
+  "Genre",
   {
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
     name: DataTypes.STRING,
-    email: { type: DataTypes.STRING, unique: true },
-    password_hash: DataTypes.STRING,
-    role: DataTypes.ENUM("USER", "ADMIN"),
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    updated_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   },
   {
-    tableName: "users",
+    tableName: "genres",
     timestamps: false,
   }
 );
 
-module.exports = User;
+module.exports = Genre;

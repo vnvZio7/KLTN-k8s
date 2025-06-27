@@ -3,8 +3,17 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import connectDB from "./config/db";
+
 import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
+import genreRoutes from "./routes/genreRoutes";
+import cinemaRoutes from "./routes/cinemaRoutes";
+import bookingRoutes from "./routes/bookingRoutes";
+import snackRoutes from "./routes/snackRoutes";
+import reviewRoutes from "./routes/reviewRoutes";
+import showtimeRoutes from "./routes/showtimeRoutes";
+import roomRoutes from "./routes/roomRoutes";
+
 import sequelize from "./config/sequelize";
 
 const app = express();
@@ -27,8 +36,17 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
 app.use("/api/auth", authRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/cinemas", cinemaRoutes);
+app.use("/api/genres", genreRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/showtimes", showtimeRoutes);
+app.use("/api/rooms", roomRoutes);
+app.use("/api/snacks", snackRoutes);
 app.use("/api/users", userRoutes);
+
 // app.use("/api/report", reportRoutes);
 async function connectWithRetry(retries = 5, delay = 5000) {
   for (let i = 0; i < retries; i++) {

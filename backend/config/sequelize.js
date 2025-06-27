@@ -1,9 +1,15 @@
 const { Sequelize } = require("sequelize");
-
-const sequelize = new Sequelize("Tcinema", "root", "root", {
-  host: "mysql",
-  dialect: "mysql",
-  logging: false, // tắt log query
-});
+require("dotenv").config();
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: "mysql",
+    logging: false, // tắt log query
+  }
+);
 
 module.exports = sequelize;

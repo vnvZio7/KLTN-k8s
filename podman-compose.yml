@@ -1,6 +1,7 @@
 services:
   mongo:
-    image: vnvzio7/tcinema-mongo
+    image: mongo:6.0
+    container_name: tcinema-mongo
     ports:
       - "27017:27017"
     volumes:
@@ -8,11 +9,11 @@ services:
       - mongo-config:/data/configdb
     command: ["mongod", "--quiet", "--logpath", "/dev/null"]
     networks:
-      - cinema-net  
+      - cinema-net
   mysql:
     # image: vnvzio7/tcinema-mysql:latest
-    image: vnvzio7/tcinema-mysql
-    container_name: mysql
+    container_name: tcinema-mysql
+    image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: Tcinema
@@ -21,7 +22,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - cinema-net   
+      - cinema-net
 volumes:
   mongo-data:
   mongo-config:

@@ -1,30 +1,34 @@
 "use strict";
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // const passwordHash = await bcrypt.hash("123456", 10);
-    return queryInterface.bulkInsert("users", [
+    const passwordHash = await bcrypt.hash("123456", 10);
+    return await queryInterface.bulkInsert("users", [
       {
-        name: "Admin User",
-        email: "admin@example.com",
-        password_hash: "123456",
+        id: 1,
+        fullname: "Admin User",
+        email: "admin@gmail.com",
+        password_hash: `${passwordHash}`,
         role: "ADMIN",
         created_at: new Date(),
+        updated_at: new Date(),
       },
       {
-        name: "Normal User",
-        email: "user@example.com",
-        password_hash: "123456",
+        id: 2,
+        fullname: "Normal User",
+        email: "user@gmail.com",
+        password_hash: `${passwordHash}`,
         role: "USER",
         created_at: new Date(),
+        updated_at: new Date(),
       },
     ]);
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("users", {
-      email: { [Sequelize.Op.in]: ["admin@example.com", "user@example.com"] },
+    return await queryInterface.bulkDelete("users", {
+      email: { [Sequelize.Op.in]: ["admin@gmail.com", "user@gmail.com"] },
     });
   },
 };

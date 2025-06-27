@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node server.js",
-    "dev": "nodemon --exec babel-node server.js"
+    "dev": "nodemon --signal SIGTERM --exec babel-node server.js"
   },
   "keywords": [],
   "author": "",

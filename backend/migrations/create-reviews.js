@@ -2,30 +2,28 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("users", {
+    await queryInterface.createTable("reviews", {
       id: {
         type: Sequelize.BIGINT,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      fullname: {
-        type: Sequelize.STRING,
+      movie_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        unique: true,
+      user_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
-      password_hash: {
-        type: Sequelize.STRING,
+      content: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
-      role: {
-        type: Sequelize.ENUM("USER", "ADMIN"),
+      star: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: "USER",
       },
       created_at: {
         type: Sequelize.DATE,
@@ -41,6 +39,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable("users");
+    await queryInterface.dropTable("reviews");
   },
 };
