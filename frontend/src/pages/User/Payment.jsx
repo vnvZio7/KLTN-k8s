@@ -45,6 +45,7 @@ export default function PaymentPage() {
       if (timeLeft <= 0) {
         toast.error("Thanh toan that bat");
         navigate("/bookings");
+        scrollTo(0, 0);
         return;
       }
     }
@@ -91,6 +92,7 @@ export default function PaymentPage() {
             clearInterval(intervalDetail); // dừng polling khi thanh toán xong
             toast.success("Thanh toan thanh cong");
             navigate("/bookings");
+            scrollTo(0, 0);
           }
         }
       } catch (err) {
