@@ -121,7 +121,9 @@ const Login = ({ setIsOpen, switchToSignUp }) => {
           onClick={() => {
             const currentUrl = window.location.href;
             sessionStorage.setItem("redirect", currentUrl);
-            window.location.href = `http://localhost:8080/api/auth/google`;
+            window.location.href = `${import.meta.env.VITE_BASE_URL}${
+              API_PATHS.AUTH.GOOGLE
+            }`;
           }}
           className="flex border-1 rounded justify-center items-center py-3 border-gray-500 cursor-pointer"
         >
