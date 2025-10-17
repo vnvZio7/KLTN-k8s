@@ -23,15 +23,15 @@ const FeaturedSection = () => {
         </button>
       </div>
       <div className="flex flex-wrap max-sm:justify-center gap-8 mt-8">
-        {shows.slice(0, 10 + count).map((show) => (
+        {shows.slice(0, 8 + count).map((show) => (
           <MovieCard key={show._id} movie={show} />
         ))}
       </div>
-      {shows.length > count + 10 && (
+      {shows.length > count + 8 && (
         <div className="flex justify-center mt-20">
           <button
             onClick={() => {
-              setCount(() => count + 5);
+              setCount(() => count + 4);
             }}
             className="px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer"
           >

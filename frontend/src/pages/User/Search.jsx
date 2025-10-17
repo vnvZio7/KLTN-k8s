@@ -15,7 +15,7 @@ const Search = () => {
   const [resultsFilter, setResultsFilter] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // số phim mỗi trang
+  const itemsPerPage = 4; // số phim mỗi trang
 
   // Tính toán dữ liệu phân trang
   const indexOfLastItem = currentPage * itemsPerPage;
