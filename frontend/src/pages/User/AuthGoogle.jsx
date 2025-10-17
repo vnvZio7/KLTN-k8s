@@ -19,6 +19,7 @@ export default function AuthCallback() {
       // Redirect based on role
       if (user.role === "ADMIN") {
         navigate("/admin/dashboard");
+        scrollTo(0, 0);
       } else {
         const redirectUrl = sessionStorage.getItem("redirect") || "/";
         window.location.href = redirectUrl;

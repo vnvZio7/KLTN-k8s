@@ -175,6 +175,7 @@ const AddShows = () => {
       if (data.success) {
         toast.success(data.message);
         navigate("/admin/dashboard");
+        scrollTo(0, 0);
       }
     } catch (error) {}
     setAddingShow(false);
