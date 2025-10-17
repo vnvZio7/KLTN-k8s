@@ -1,12 +1,16 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 import axiosInstance from "../utils/axiosIntence";
 import { API_PATHS } from "../utils/apiPaths";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
-const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const navigate = useNavigate();
   useEffect(() => {
     if (user) return;
 
@@ -40,11 +44,35 @@ const UserProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem("token");
   };
+
+  const handleLogout = () => {
+    setIsLoggingOut(true);
+
+    localStorage.clear();
+    clearUser();
+
+    navigate("/");
+    scrollTo(0, 0);
+  };
+
+  const getToken = () => {
+    if (user) return localStorage.getItem("token");
+  };
   return (
-    <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>
+    <UserContext.Provider
+      value={{
+        user,
+        loading,
+        updateUser,
+        clearUser,
+        handleLogout,
+        getToken,
+        isLoggingOut,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
 };
 
-export default UserProvider;
+export const useUserContext = () => useContext(UserContext);

@@ -8,5 +8,6 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 3000,
+    // allowedHosts: ["f92edb53387051128d400601fdfe7725.serveo.net"],
   },
 });

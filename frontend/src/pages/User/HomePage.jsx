@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import HeroSection from "../../components/HeroSection";
+import FeaturedSection from "../../components/FeaturedSection";
+import TrailersSection from "../../components/TrailersSection";
 
 const HomePage = () => {
   return (
-    <div>
-      <Link to="/login">Login</Link>
-    </div>
+    <>
+      <HeroSection />
+      <FeaturedSection />
+      <TrailersSection />
+    </>
   );
 };
 

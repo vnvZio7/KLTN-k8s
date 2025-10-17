@@ -4,7 +4,13 @@
 @theme {
   --font-display: "Poppins", "sans-serif";
   --breakpoint-3xl: 1920px;
-  --color-primary: #1368ec;
+  --color-primary: #f84565;
+  --color-primary-dull: #d63854;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #787777 #1e1e1e;
 }
 
 @layer base {
@@ -13,7 +19,45 @@
   }
 
   body {
-    background-color: #fcfbfc;
+    color: #fcfbfc;
+    background-color: #09090b;
     overflow-x: hidden;
+  }
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+::-webkit-calendar-picker-indicator:hover {
+  transition: all;
+  transform: translateY(-1px);
+  transition-duration: 300ms;
+}
+.scan-line {
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+  width: 95%;
+  height: 2px;
+  background: red;
+  animation: scan 2s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0% {
+    top: 0%;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
   }
 }
